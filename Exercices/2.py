@@ -1,6 +1,9 @@
 # ---------------------------------
 # variáveis globais
 
+from re import A
+
+
 turma = [ ]
 notas_acima = [ ]
 notas_abaixo = [ ]
@@ -56,6 +59,58 @@ def distribui_notas(turma, notas_acima, notas_abaixo):
         notas_abaixo.append(aluno)
 
 # ---------------------------------
+# ordenando por nome
+
+{}
+
+
+def ordenaPorNota(turma):
+  notas = [ ]
+
+  for aluno in turma:
+    notas.append(aluno['nota'])
+
+  for i in range(len(turma)):
+    # n [0 : i-1] : [i : final]
+    pos_menor_nota = pos_menor(notas[i:]) + i
+
+    # print('-------------------')
+    # print(f'estou passando {notas[i:]}')
+    # print(f'posicao do menor = {pos_menor_nota}')
+    # print(f'menor nota encontrada {notas[pos_menor_nota]}')
+    # print('-------------------')
+
+    aux = turma[i]
+    turma[i] = turma[pos_menor_nota]
+    turma[pos_menor_nota] = aux
+
+    aux = notas[i]
+    notas[i] = notas[pos_menor_nota]
+    notas[pos_menor_nota] = aux
+
+    imprime_turma(turma)
+    print(notas)
+    print('-----------------------')
+
+# ---------------------------------
+# descobrindo posição do menor
+
+def pos_menor(lista):
+  indice_do_menor = None
+
+  for i in range(len(lista)):
+
+    elemento = lista[i]
+
+    if indice_do_menor == None:
+      indice_do_menor = i
+
+    if elemento < lista[indice_do_menor]:
+      indice_do_menor = i
+
+  return indice_do_menor
+
+# ---------------------------------
 # aonde executa
 
 le_entadas( turma )
@@ -74,3 +129,7 @@ imprime_turma(notas_acima)
 
 print("### NOTAS ABAIXO ###")
 imprime_turma(notas_abaixo)
+
+print("### ORDENANDO POR NOTAS ###")
+ordenaPorNota(turma)
+imprime_turma(turma)
