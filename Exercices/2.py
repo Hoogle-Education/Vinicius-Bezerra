@@ -74,12 +74,6 @@ def ordenaPorNota(turma):
     # n [0 : i-1] : [i : final]
     pos_menor_nota = pos_menor(notas[i:]) + i
 
-    # print('-------------------')
-    # print(f'estou passando {notas[i:]}')
-    # print(f'posicao do menor = {pos_menor_nota}')
-    # print(f'menor nota encontrada {notas[pos_menor_nota]}')
-    # print('-------------------')
-
     aux = turma[i]
     turma[i] = turma[pos_menor_nota]
     turma[pos_menor_nota] = aux
@@ -88,10 +82,24 @@ def ordenaPorNota(turma):
     notas[i] = notas[pos_menor_nota]
     notas[pos_menor_nota] = aux
 
-    imprime_turma(turma)
-    print(notas)
-    print('-----------------------')
+def ordenaPorNome(turma):
+  nomes = [ ]
 
+  for aluno in turma:
+    nomes.append(aluno['nome'])
+
+  for i in range(len(turma)):
+    # n [0 : i-1] : [i : final]
+    pos_menor_nome = pos_menor(nomes[i:]) + i
+
+    aux = turma[i]
+    turma[i] = turma[pos_menor_nome]
+    turma[pos_menor_nome] = aux
+
+    aux = nomes[i]
+    nomes[i] = nomes[pos_menor_nome]
+    nomes[pos_menor_nome] = aux
+    
 # ---------------------------------
 # descobrindo posição do menor
 
@@ -132,4 +140,9 @@ imprime_turma(notas_abaixo)
 
 print("### ORDENANDO POR NOTAS ###")
 ordenaPorNota(turma)
+imprime_turma(turma)
+
+
+print("### ORDENANDO POR NOMES ###")
+ordenaPorNome(turma)
 imprime_turma(turma)
